@@ -90,4 +90,16 @@ router.post("/", async (req, res) => {
   if (!order) return res.status(400).json({ success: false });
   res.send(order);
 });
+router.get("/get/totalsales", async (req, res) => {
+  const totalSales = await Order.aggregate([
+    { $group: { _id: null, totalsales: { $sum: "$totalPrice" } } },
+  ]);
+  if (!totalSales) return res.status(404).json({ success: false });
+  res.send({ totalSales: totalSales.pop().totalsales });
+});
+router.get("/get/count", async (req, res) => {
+  const orderCount = await Order.countDocuments();
+  if (!orderCount) return res.status(404).json({ success: false });
+  res.send({ orderCount });
+});
 module.exports = router;
