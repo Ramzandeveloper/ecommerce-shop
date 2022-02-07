@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
   let user = new User({
     name: req.body.name,
     email: req.body.email,
-    passwordHash: brcypt.hashSync(req.body.passwordHash, 10),
+    passwordHash: bcrypt.hashSync(req.body.passwordHash, 10),
     phone: req.body.phone,
     street: req.body.street,
     isAdmin: req.body.isAdmin,
@@ -34,7 +34,7 @@ router.post("/register", async (req, res) => {
   let user = new User({
     name: req.body.name,
     email: req.body.email,
-    passwordHash: brcypt.hashSync(req.body.passwordHash, 10),
+    passwordHash: bcrypt.hashSync(req.body.passwordHash, 10),
     phone: req.body.phone,
     street: req.body.street,
     isAdmin: req.body.isAdmin,
@@ -49,6 +49,7 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+  console.log("data", req);
   const user = await User.findOne({ email: req.body.email });
   const secret = process.env.SECRETE;
   if (!user) {

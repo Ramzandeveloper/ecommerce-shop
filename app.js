@@ -6,13 +6,13 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 //Envoriment File
 require("dotenv/config");
+
 const authJwt = require("./helpers/jwt");
 const errorHandler = require("./helpers/error-handler");
 const api = process.env.API_URL;
-const productsRoutes = require("./routers/products");
-const categoriesRoutes = require("./routers/categories");
-const ordersRoutes = require("./routers/orders");
+const jobRoutes = require("./routers/jobs");
 const usesrRoutes = require("./routers/users");
+const applyJobRoutes = require("./routers/apply-job");
 
 //middleware
 app.use(cors());
@@ -23,10 +23,9 @@ app.use(authJwt());
 app.use(errorHandler);
 app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
 //Routers
-app.use(`${api}/products`, productsRoutes);
-app.use(`${api}/categories`, categoriesRoutes);
-app.use(`${api}/orders`, ordersRoutes);
+app.use(`${api}/job`, jobRoutes);
 app.use(`${api}/users`, usesrRoutes);
+app.use(`${api}/apply-job`, applyJobRoutes);
 
 //Moongoose connection
 mongoose
