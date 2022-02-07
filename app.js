@@ -13,8 +13,7 @@ const api = process.env.API_URL;
 const jobRoutes = require("./routers/jobs");
 const usesrRoutes = require("./routers/users");
 const applyJobRoutes = require("./routers/apply-job");
-
-//middleware
+//Middlewares
 app.use(cors());
 app.options("*", cors());
 app.use(bodyParser.json());
